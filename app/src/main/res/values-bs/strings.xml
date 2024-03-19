@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CineasteApp</string>
+    <string name="recent">Nedavno</string>
+    <string name="search">Traži</string>
+    <string name="favorite">Omiljeni</string>
+</resources>
