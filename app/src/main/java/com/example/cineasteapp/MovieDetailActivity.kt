@@ -11,6 +11,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MovieDetailActivity : AppCompatActivity() {
     private lateinit var movie: Movie
@@ -20,6 +21,8 @@ class MovieDetailActivity : AppCompatActivity() {
     private lateinit var genre : TextView
     private lateinit var website : TextView
     private lateinit var poster : ImageView
+    private lateinit var shareButton : FloatingActionButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_detail)
@@ -29,6 +32,7 @@ class MovieDetailActivity : AppCompatActivity() {
         genre = findViewById(R.id.movie_genre)
         poster = findViewById(R.id.movie_poster)
         website = findViewById(R.id.movie_website)
+        shareButton = findViewById(R.id.shareButton)
         val extras = intent.extras
         if (extras != null) {
             movie = getMovieByTitle(extras.getString("movie_title",""))
@@ -39,6 +43,13 @@ class MovieDetailActivity : AppCompatActivity() {
 
         website.setOnClickListener{
             showWebsite()
+        }
+
+        title.setOnClickListener {
+            showWebsiteTitle()
+        }
+        shareButton.setOnClickListener{
+            shareOverview()
         }
     }
     private fun populateDetails() {
@@ -70,5 +81,25 @@ class MovieDetailActivity : AppCompatActivity() {
         } catch (e: ActivityNotFoundException) {
             // Definisati naredbe ako ne postoji aplikacija za navedenu akciju
         }
+    }
+
+    private fun showWebsiteTitle(){
+        val query = Uri.encode("${movie.title} trailer")
+        val webIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/search?q=$query"))
+        try {
+            startActivity(webIntent)
+        } catch (e: ActivityNotFoundException) {
+            // Definisati naredbe ako ne postoji aplikacija za navedenu akciju
+        }
+    }
+
+    private fun shareOverview(){
+        val intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, movie.overview)
+            type = "text/plain"
+        }
+        val shareIntent = Intent.createChooser(intent, null)
+        startActivity(shareIntent)
     }
 }

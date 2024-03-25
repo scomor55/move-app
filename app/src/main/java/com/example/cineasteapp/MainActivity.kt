@@ -1,6 +1,9 @@
 package com.example.cineasteapp
 
+import android.content.BroadcastReceiver
 import android.content.Intent
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
@@ -26,9 +29,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val br: BroadcastReceiver = MyBroadcastReceiver()
+        val filter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION).apply {
+            addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED)
+        }
+//Register
+        registerReceiver(br, filter)
+//Unregister
+       // unregisterReceiver(receiver);
+
+
         searchText = findViewById(R.id.searchText)
-
-
         favoriteMovies = findViewById(R.id.favoriteMovies)
         favoriteMovies.layoutManager = LinearLayoutManager(
             this,
