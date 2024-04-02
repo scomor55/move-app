@@ -1,41 +1,5 @@
 package com.example.cineasteapp
 
-/*
-
- fun getFavoriteMovies(): List<Movie> {
-        return listOf(
-            Movie(1,"The Fast and the Furious",
-                "Los Angeles police officer Brian O'Conner must decide where his loyalty really lies when he becomes enamored with the street racing world he has been sent undercover to destroy.",
-                "22.06.2001.","https://www.imdb.com/title/tt0232500/",
-                "thriller"),Movie(2,"Top Gun: Maverick",
-                "After thirty years, Maverick is still pushing the envelope as a top naval aviator, but must confront ghosts of his past when he leads TOP GUN's elite graduates on a mission that demands the ultimate sacrifice from those chosen to fly it.",
-                "27.05.2022.","https://www.imdb.com/title/tt1745960/",
-                "drama"),Movie(3,"Avengers: Endgame",
-                "After the devastating events of Osvetnici: Rat beskonačnosti (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.",
-                "16.02.2005.","https://www.imdb.com/title/tt4154796/",
-                "action")
-//Dodajte filmove po zelji
-        )
-    }
-    fun getRecentMovies(): List<Movie> {
-        return listOf(
-            Movie(1,"Creed III",
-                "Adonis has been thriving in both his career and family life, but when a childhood friend and former boxing prodigy resurfaces, the face-off is more than just a fight.",
-                "26.03.2019.","https://www.imdb.com/title/tt11145118/",
-                "mystery"),Movie(2,"Johnny English Strikes Again",
-                "After a cyber-attack reveals the identity of all of the active undercover agents in Britain, Johnny English is forced to come out of retirement to find the mastermind hacker.",
-                "05.10.2018.","https://www.imdb.com/title/tt6921996/",
-                "comedy"),Movie(3,"Armageddon",
-                "After discovering that an asteroid the size of Texas will impact Earth in less than a month, NASA recruits a misfit team of deep-core drillers to save the planet.",
-                "01.08.1998.","https://www.imdb.com/title/tt0120591/",
-                "scifi"),
-        )
-    }
-
-
-
- */
-
 
 fun getFavoriteMovies(): List<Movie> {
     return listOf(
