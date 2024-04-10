@@ -3,4 +3,6 @@
     <string name="recent">Recent</string>
     <string name="search">Search</string>
     <string name="favorite">Favorite</string>
+    <string name="favoritesText">Favorite movies</string>
+    <string name="recentTexts">Recent movies</string>
 </resources>

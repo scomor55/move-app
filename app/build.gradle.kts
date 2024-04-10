@@ -49,7 +49,11 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.compiler)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
     testImplementation(libs.junit)
+
+    implementation("com.google.android.material:material:1.11.0")
     testImplementation("org.hamcrest:hamcrest:2.2")
     testImplementation("junit:junit:4.13.2")
 
