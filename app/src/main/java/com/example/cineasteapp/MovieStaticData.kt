@@ -44,3 +44,11 @@ fun getRecentMovies(): List<Movie> {
         //Dodajte filmove po zelji
     )
 }
+
+fun getMovieActors():Map<String,List<String>>{
+    return mapOf<String,List<String>>("Johnny English Strikes Again" to listOf("Rowan Atkinson","Ben Miller","Emma Thompson"),"The Fast and the Furious" to listOf("Vin Diesel","Paul Walker","Michelle Rodriguez"),"Mad Max: Fury Road" to listOf("Tom Hardy","Charlize Theron","Nicholas Hoult"),"Top Gun: Maverick" to listOf("Tom Cruise","Miles Teller","Val Kilmer"),"Furiosa: A Mad Max Saga" to listOf("Chris Hemsworth","Quaden Bayles","Anya Taylor-Joy"),"Creed III" to listOf("Jonathan Majors","Michael B. Jordan","Tessa Thompson"),"Armageddon" to listOf("Bruce Willis","Liv Tyler","Ben Affleck"),"Interstellar" to listOf("Matthew McConaughey ","Mat Damon","Anne Hathaway"))
+}
+
+fun getSimilarMovies():Map<String,List<String>>{
+    return mapOf<String,List<String>>("Johnny English Strikes Again" to listOf("Spy","Get Smart","The Brothers Grimsby"),"The Fast and the Furious" to listOf("Fast Five","Fourious 7","Need for Speed"),"Mad Max: Fury Road" to listOf("The Road Warrior","Dredd","The Book of Eli"),"Top Gun: Maverick" to listOf("Behind Enemy Lines","Midway","Sky Fighters"),"Furiosa: A Mad Max Saga" to listOf("Edge of Tommorrow","Morbius","Rebel Moon"),"Creed III" to listOf("Million Dollar Baby","Southpaw","Warrior"),"Armageddon" to listOf("Deep Impact","The Day After Tomorrow"," Independence Day"),"Interstellar" to listOf("A Space Odyssey","Oblivion","Moon"))
+}
