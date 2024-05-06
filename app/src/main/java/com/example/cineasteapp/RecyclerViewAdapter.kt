@@ -49,12 +49,6 @@ class MovieListAdapter(
                 .getIdentifier("picture1", "drawable", context.packageName)
             holder.movieImage.setImageResource(id)
         }
-      /*  var id: Int = context.resources
-            .getIdentifier(genreMatch, "drawable", context.packageName)
-        if (id==0) id=context.resources
-            .getIdentifier("picture1", "drawable", context.packageName)
-        holder.movieImage.setImageResource(context.resources
-            .getIdentifier("picture1", "drawable", context.packageName))*/
 
         holder.itemView.setOnClickListener{ onItemClicked(movies[position]) }
     }
