@@ -24,11 +24,37 @@ class MovieListAdapter(
         val genreMatch: String? = movies[position].genre
         //Pronalazimo id drawable elementa na osnovu naziva zanra
         val context: Context = holder.movieImage.context
-        var id: Int = context.resources
+
+        val favoriteMovies = getFavoriteMovies()
+        val recentMovies = getRecentMovies()
+        var favrec = false
+        for(movie in favoriteMovies){
+            if(movie.title == movies[position].title){
+                favrec = true
+            }
+        }
+        for(movie in recentMovies){
+            if(movie.title == movies[position].title){
+                favrec = true
+            }
+        }
+
+        if(!favrec){
+            holder.movieImage.setImageResource(context.resources
+                .getIdentifier("picture1", "drawable", context.packageName))
+        }else{
+            var id: Int = context.resources
+                .getIdentifier(genreMatch, "drawable", context.packageName)
+            if (id==0) id=context.resources
+                .getIdentifier("picture1", "drawable", context.packageName)
+            holder.movieImage.setImageResource(id)
+        }
+      /*  var id: Int = context.resources
             .getIdentifier(genreMatch, "drawable", context.packageName)
         if (id==0) id=context.resources
             .getIdentifier("picture1", "drawable", context.packageName)
-        holder.movieImage.setImageResource(id)
+        holder.movieImage.setImageResource(context.resources
+            .getIdentifier("picture1", "drawable", context.packageName))*/
 
         holder.itemView.setOnClickListener{ onItemClicked(movies[position]) }
     }

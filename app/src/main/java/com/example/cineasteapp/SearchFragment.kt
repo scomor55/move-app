@@ -1,6 +1,8 @@
 package com.example.cineasteapp
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +10,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,6 +21,7 @@ class SearchFragment : Fragment() {
     private lateinit var searchText: EditText
     private lateinit var searchButton: ImageButton
     private lateinit var recyclerView: RecyclerView
+    private lateinit var searchMovies : MovieListAdapter
     private var searchMoviesAdapter = SearchMoviesAdapter(emptyList(), onItemClicked = {})
     private val scope = CoroutineScope(Job() + Dispatchers.Main)
 
@@ -31,8 +35,10 @@ class SearchFragment : Fragment() {
         searchText = view.findViewById(R.id.searchText)
         searchButton = view.findViewById(R.id.searchButton)
         recyclerView = view.findViewById(R.id.searchResultsRecyclerView)
-
-        recyclerView.adapter = searchMoviesAdapter
+        recyclerView.layoutManager = GridLayoutManager(activity, 2)
+        searchMovies = MovieListAdapter(arrayListOf()){movie -> showMovieDetails(movie) }
+        recyclerView.adapter = searchMovies
+      //  searchMovies.updateMovies(emptyList())
         // Postavljanje slušaoca događaja na dugme za pretragu
         searchButton.setOnClickListener {
             onClick()
@@ -40,15 +46,22 @@ class SearchFragment : Fragment() {
 
         return view;
     }
-   /* override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        arguments?.getString("search")?.let {
-            searchText.setText(it)
+
+    private fun showMovieDetails(movie: Movie) {
+        val intent = Intent(activity, MovieDetailActivity::class.java).apply {
+            putExtra("movie_title", movie.title)
         }
-        view.findViewById<View>(R.id.searchButton).setOnClickListener {
-            onClick()
-        }
-    }*/
+        startActivity(intent)
+    }
+    /* override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+         super.onViewCreated(view, savedInstanceState)
+         arguments?.getString("search")?.let {
+             searchText.setText(it)
+         }
+         view.findViewById<View>(R.id.searchButton).setOnClickListener {
+             onClick()
+         }
+     }*/
 
     private fun onClick() {
         val toast = Toast.makeText(context, "Search start", Toast.LENGTH_SHORT)
@@ -71,8 +84,11 @@ class SearchFragment : Fragment() {
     fun searchDone(movies:List<Movie>){
         val toast = Toast.makeText(context, "Search done", Toast.LENGTH_SHORT)
         toast.show()
-        searchMoviesAdapter = SearchMoviesAdapter(movies = movies, onItemClicked = {})
-        searchMoviesAdapter.updateMovies(movies)
+        Log.d("SearchFragment", "Retrieved movies: $movies")
+
+        searchMovies.updateMovies(movies)
+       // searchMoviesAdapter = SearchMoviesAdapter(movies = movies, onItemClicked = {})
+        //searchMoviesAdapter.updateMovies(movies)
     }
     fun onError() {
         val toast = Toast.makeText(context, "Search error", Toast.LENGTH_SHORT)
