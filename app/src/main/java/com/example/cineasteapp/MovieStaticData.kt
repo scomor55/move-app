@@ -3,52 +3,64 @@ package com.example.cineasteapp
 
 fun getFavoriteMovies(): List<Movie> {
     return listOf(
-        Movie(1,"Johnny English Strikes Again",
-            "After a cyber-attack reveals the identity of all of the active undercover agents in Britain, Johnny English is forced to come out of retirement to find the mastermind hacker.",
-            "05.10.2018.","https://www.imdb.com/title/tt6921996/",
-            "comedy","res/drawable/comedy.png"),
-        Movie(2,"The Fast and the Furious",
-            "Los Angeles police officer Brian O'Conner must decide where his loyalty really lies when he becomes enamored with the street racing world he has been sent undercover to destroy.",
-            "22.06.2001.","https://www.imdb.com/title/tt0232500/",
-            "thriller", "res/drawable/thriller.png"),
-        Movie(3,"Mad Max: Fury Road",
-            "In a post-apocalyptic wasteland, a woman rebels against a tyrannical ruler in search for her homeland with the aid of a group of female prisoners, a psychotic worshiper and a drifter named Max.",
-            "13.05.2015.","https://www.imdb.com/title/tt1392190/",
-            "madmax","res/drawable/madmax.png"),
-        Movie(4,"Top Gun: Maverick",
-            "After thirty years, Maverick is still pushing the envelope as a top naval aviator, but must confront ghosts of his past when he leads TOP GUN's elite graduates on a mission that demands the ultimate sacrifice from those chosen to fly it.",
-            "27.05.2022.","https://www.imdb.com/title/tt1745960/",
-            "drama","res/drawable/drama.png"),
-        //Dodajte filmove po zelji
+        Movie(1,"Pride and prejudice",
+            "Sparks fly when spirited Elizabeth Bennet meets single, rich, and proud Mr. Darcy. But Mr. Darcy reluctantly finds himself falling in love with a woman beneath his class. Can each overcome their own pride and prejudice?",
+            "16.02.2005.","https://www.imdb.com/title/tt0414387/",
+            "drama","https://www.imdb.com/title/tt0414387/","https://www.imdb.com/title/tt0414387/"),
+        Movie(2,"Pulp Fiction",
+            "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
+            "14.10.1994.","https://www.imdb.com/title/tt0110912/",
+            "crime","https://www.imdb.com/title/tt0414387/","https://www.imdb.com/title/tt0414387/"),
+        Movie(3,"The Lord of the Rings",
+            "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.",
+            "10.12.2001","https://www.imdb.com/title/tt0120737/",
+            "fantasy","https://www.imdb.com/title/tt0414387/","https://www.imdb.com/title/tt0414387/"),
+        Movie(4,"Serenity",
+            "The crew of the ship Serenity try to evade an assassin sent to recapture one of their members who is telepathic.",
+            "30.09.2005","https://www.imdb.com/title/tt0379786/",
+            "scifi","https://www.imdb.com/title/tt0414387/","https://www.imdb.com/title/tt0414387/"),
+        Movie(5,"Shaun of the Dead",
+            "A man's uneventful life is disrupted by the zombie apocalypse.",
+            "09.04.2004","https://www.imdb.com/title/tt0365748/",
+            "comedy","https://www.imdb.com/title/tt0414387/","https://www.imdb.com/title/tt0414387/"),
+        Movie(6,"Watchmen",
+            "In 1985 where former superheroes exist, the murder of a colleague sends active vigilante Rorschach into his own sprawling investigation, uncovering something that could completely change the course of history as we know it.",
+            "23.02.2009.","https://www.imdb.com/title/tt0409459/",
+            "action","https://www.imdb.com/title/tt0414387/","https://www.imdb.com/title/tt0414387/")
     )
 }
 fun getRecentMovies(): List<Movie> {
     return listOf(
         Movie(1,"Furiosa: A Mad Max Saga",
             "The origin story of renegade warrior Furiosa before her encounter and teamup with Mad Max.",
-            "24.05.2024.","https://www.imdb.com/title/tt12037194/",
-            "action","res/drawable/action.png"),
-        Movie(2,"Creed III",
-            "Adonis has been thriving in both his career and family life, but when a childhood friend and former boxing prodigy resurfaces, the face-off is more than just a fight.",
-            "26.03.2019.","https://www.imdb.com/title/tt11145118/",
-            "mystery","res/drawable/mystery.png"),
-        Movie(3,"Armageddon",
-            "After discovering that an asteroid the size of Texas will impact Earth in less than a month, NASA recruits a misfit team of deep-core drillers to save the planet.",
-            "01.08.1998.","https://www.imdb.com/title/tt0120591/",
-            "scifi","res/drawable/scifi.png"),
-        Movie(4,"Interstellar",
-            "When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.",
-            "05.11.2014.","https://www.imdb.com/title/tt0816692/",
-            "interstellar","res/drawable/interstellar.png"),
+            "24.05.2024.","https://www.imdb.com/title/tt12037194",
+            "action","https://www.imdb.com/title/tt12037194","https://www.imdb.com/title/tt12037194"),
 
-        //Dodajte filmove po zelji
+        Movie(2,"Deadpool & Wolverine",
+            "Deadpool and Wolverine reunite.",
+            "26.07.2024.","https://www.imdb.com/title/tt6263850",
+            "comedy","https://www.imdb.com/title/tt12037194","https://www.imdb.com/title/tt12037194"),
+
+        Movie(3,"Despicable Me 4",
+            "Gru, Lucy, Margo, Edith, and Agnes welcome a new member to the family, Gru Jr., who is intent on tormenting his dad. ",
+            "05.07.2024.","https://www.imdb.com/title/tt7510222",
+            "family","https://www.imdb.com/title/tt12037194","https://www.imdb.com/title/tt12037194"),
+
+        Movie(4,"A Quiet Place: Day One",
+            "Experience the day the world went quiet.",
+            "28.07.2024.","https://www.imdb.com/title/tt13433802",
+            "horror","https://www.imdb.com/title/tt12037194","https://www.imdb.com/title/tt12037194"),
+
+        Movie(5,"Bob Marley: One Love",
+            "The story of how reggae icon Bob Marley overcame adversity, and the journey behind his revolutionary music.",
+            "14.02.2024.","https://www.imdb.com/title/tt8521778",
+            "drama","https://www.imdb.com/title/tt12037194","https://www.imdb.com/title/tt12037194"),
     )
 }
-
 fun getMovieActors():Map<String,List<String>>{
-    return mapOf<String,List<String>>("Johnny English Strikes Again" to listOf("Rowan Atkinson","Ben Miller","Emma Thompson"),"The Fast and the Furious" to listOf("Vin Diesel","Paul Walker","Michelle Rodriguez"),"Mad Max: Fury Road" to listOf("Tom Hardy","Charlize Theron","Nicholas Hoult"),"Top Gun: Maverick" to listOf("Tom Cruise","Miles Teller","Val Kilmer"),"Furiosa: A Mad Max Saga" to listOf("Chris Hemsworth","Quaden Bayles","Anya Taylor-Joy"),"Creed III" to listOf("Jonathan Majors","Michael B. Jordan","Tessa Thompson"),"Armageddon" to listOf("Bruce Willis","Liv Tyler","Ben Affleck"),"Interstellar" to listOf("Matthew McConaughey ","Mat Damon","Anne Hathaway"))
+    return mapOf<String,List<String>>("Pulp Fiction" to listOf("John Travolta","Samuel L. Jackson","Bruce Willis","Amanda Plummer","Laura Lovelace"),"Pride and prejudice" to listOf("Keira Knightley","Talulah Riley","Rosamund Pike"))
 }
 
 fun getSimilarMovies():Map<String,List<String>>{
-    return mapOf<String,List<String>>("Johnny English Strikes Again" to listOf("Spy","Get Smart","The Brothers Grimsby"),"The Fast and the Furious" to listOf("Fast Five","Fourious 7","Need for Speed"),"Mad Max: Fury Road" to listOf("The Road Warrior","Dredd","The Book of Eli"),"Top Gun: Maverick" to listOf("Behind Enemy Lines","Midway","Sky Fighters"),"Furiosa: A Mad Max Saga" to listOf("Edge of Tommorrow","Morbius","Rebel Moon"),"Creed III" to listOf("Million Dollar Baby","Southpaw","Warrior"),"Armageddon" to listOf("Deep Impact","The Day After Tomorrow"," Independence Day"),"Interstellar" to listOf("A Space Odyssey","Oblivion","Moon"))
+    return mapOf<String,List<String>>("Pulp Fiction" to listOf("Fight Club","Inception","Se7en"),"Pride and prejudice" to listOf("Jane Eyre","The Notebook","Atonement"))
 }

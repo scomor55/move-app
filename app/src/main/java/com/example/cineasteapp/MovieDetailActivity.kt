@@ -1,21 +1,25 @@
 package com.example.cineasteapp
 
-import android.annotation.SuppressLint
+import android.app.SearchManager
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.bumptech.glide.Glide
+import com.example.cineaste.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class MovieDetailActivity : AppCompatActivity() {
     private lateinit var movie: Movie
@@ -25,7 +29,10 @@ class MovieDetailActivity : AppCompatActivity() {
     private lateinit var genre : TextView
     private lateinit var website : TextView
     private lateinit var poster : ImageView
+    private lateinit var backdrop: ImageView
     private lateinit var shareButton : FloatingActionButton
+    private val posterPath = "https://image.tmdb.org/t/p/w780"
+    private val backdropPath = "https://image.tmdb.org/t/p/w500"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,20 +44,24 @@ class MovieDetailActivity : AppCompatActivity() {
         poster = findViewById(R.id.movie_poster)
         website = findViewById(R.id.movie_website)
         shareButton = findViewById(R.id.shareButton)
+        backdrop = findViewById(R.id.movie_backdrop)
         val extras = intent.extras
         if (extras != null) {
-            movie = getMovieByTitle(extras.getString("movie_title",""))
-            populateDetails()
+            if (extras.containsKey("movie_title")) {
+                movie = getMovieByTitle(extras.getString("movie_title", ""))
+                populateDetails()
+            }
+            else if (extras.containsKey("movie_id")){
+                getMovieDetails(extras.getLong("movie_id"))
+            }
         } else {
             finish()
         }
-
         website.setOnClickListener{
             showWebsite()
         }
-
-        title.setOnClickListener {
-            showWebsiteTitle()
+        title.setOnClickListener{
+            youtubeSearch()
         }
         shareButton.setOnClickListener{
             shareOverview()
@@ -72,32 +83,44 @@ class MovieDetailActivity : AppCompatActivity() {
         if (id==0) id=context.resources
             .getIdentifier("picture1", "drawable", context.packageName)
         poster.setImageResource(id)
+        Glide.with(context)
+            .load(posterPath + movie.posterPath)
+            .placeholder(R.drawable.picture1)
+            .error(id)
+            .fallback(id)
+            .into(poster);
+        var backdropContext: Context = backdrop.getContext()
+        Glide.with(backdropContext)
+            .load(backdropPath + movie.backdropPath)
+            .centerCrop()
+            .placeholder(R.drawable.backdrop)
+            .error(R.drawable.backdrop)
+            .fallback(R.drawable.backdrop)
+            .into(backdrop);
     }
     private fun getMovieByTitle(name:String):Movie{
         val movies: ArrayList<Movie> = arrayListOf()
         movies.addAll(getRecentMovies())
         movies.addAll(getFavoriteMovies())
         val movie= movies.find { movie -> name == movie.title }
-        return movie?:Movie(0,"Test","Test","Test","Test","Test","Test")
+        return movie?:Movie(0,"Test","Test","Test","Test","Test","Test","Test")
     }
-
-
     private fun showWebsite(){
         val webIntent = Intent(Intent.ACTION_VIEW, Uri.parse(movie.homepage))
         try {
             startActivity(webIntent)
         } catch (e: ActivityNotFoundException) {
-            // Definisati naredbe ako ne postoji aplikacija za navedenu akciju
+            Log.v("Error",e.toString())
         }
     }
-
-    private fun showWebsiteTitle(){
-        val query = Uri.encode("${movie.title} trailer")
-        val webIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/search?q=$query"))
+    private fun youtubeSearch(){
+        val intent = Intent(Intent.ACTION_WEB_SEARCH).apply {
+            putExtra(SearchManager.QUERY, movie.title + " trailer")
+        }
         try {
-            startActivity(webIntent)
+            startActivity(intent)
         } catch (e: ActivityNotFoundException) {
-            // Definisati naredbe ako ne postoji aplikacija za navedenu akciju
+            Log.v("Error",e.toString())
         }
     }
 
@@ -109,5 +132,20 @@ class MovieDetailActivity : AppCompatActivity() {
         }
         val shareIntent = Intent.createChooser(intent, null)
         startActivity(shareIntent)
+    }
+
+    fun getMovieDetails(query: Long){
+        val scope = CoroutineScope(Job() + Dispatchers.Main)
+        scope.launch{
+            val result = MovieRepository.getMovieDetails(query)
+            when (result) {
+                is Result.Success<Movie> -> movieRetrieved(result.data)
+                else-> Log.v("DETALJI","Greška pri dobavljanju detalja")
+            }
+        }
+    }
+    fun movieRetrieved(movie:Movie){
+        this.movie =movie;
+        populateDetails()
     }
 }
