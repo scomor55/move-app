@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.cineaste"
+    namespace = "com.example.cineasteapp"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.cineaste"
+        applicationId = "com.example.cineasteapp"
         minSdk = 30
         targetSdk = 34
         versionCode = 1
