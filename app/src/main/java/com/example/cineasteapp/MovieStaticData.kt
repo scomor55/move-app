@@ -56,6 +56,7 @@ fun getRecentMovies(): List<Movie> {
 
     )
 }
+
 fun getMovieActors():Map<String,List<String>>{
     return mapOf<String,List<String>>("Pulp Fiction" to listOf("John Travolta","Samuel L. Jackson","Bruce Willis","Amanda Plummer","Laura Lovelace"),"Pride and prejudice" to listOf("Keira Knightley","Talulah Riley","Rosamund Pike"))
 }
