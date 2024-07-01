@@ -60,11 +60,8 @@ class SearchFragment : Fragment() {
 
     fun search(query: String){
         val scope = CoroutineScope(Job() + Dispatchers.Main)
-        // Kreira se Coroutine na UI
         scope.launch{
-            // Vrti se poziv servisa i suspendira se rutina dok se `withContext` ne zavrsii
             val result = MovieRepository.searchRequest(query)
-            // Prikaze se rezultat korisniku na glavnoj niti
             when (result) {
                 is Result.Success<List<Movie>> -> searchDone(result.data)
                 else-> onError()
