@@ -63,7 +63,7 @@ class SearchFragment : Fragment() {
         scope.launch{
             val result = MovieRepository.searchRequest(query)
             when (result) {
-                is Result.Success<List<Movie>> -> searchDone(result.data)
+                is GetMoviesResponse -> searchDone(result.movies)
                 else-> onError()
             }
         }

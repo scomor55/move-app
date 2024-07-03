@@ -18,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
+    private val br: BroadcastReceiver = MyBroadcastReceiver()
+    private val filter = IntentFilter("android.net.conn.CONNECTIVITY_CHANGE")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -34,5 +36,18 @@ class MainActivity : AppCompatActivity() {
                 navController.navigate(R.id.searchFragment,bundle)
             }
         }
+        Intent(this, LatestMovieService::class.java).also {
+            startForegroundService(it)
+            return
+        }
+    }
+    override fun onResume() {
+        super.onResume()
+        registerReceiver(br, filter)
+    }
+
+    override fun onPause() {
+        unregisterReceiver(br)
+        super.onPause()
     }
 }

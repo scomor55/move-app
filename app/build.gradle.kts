@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -16,9 +17,15 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    buildFeatures {
+        buildConfig = true
+    }
     buildTypes {
+        debug{
+            buildConfigField ("String", "TMDB_API_KEY", project.properties["TMDB_API_KEY"].toString())
+        }
         release {
+            buildConfigField ("String", "TMDB_API_KEY", project.properties["TMDB_API_KEY"].toString())
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -26,6 +33,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -54,6 +62,11 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:5.0.0-rc01")
     annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1-Beta")
-
+    implementation("com.squareup.retrofit2:retrofit:+")
+    implementation("com.squareup.retrofit2:converter-gson:+")
+    implementation("androidx.room:room-runtime:+")
+    annotationProcessor("androidx.room:room-compiler:+")
+    implementation("androidx.room:room-ktx:+")
+    kapt("androidx.room:room-compiler:+")
 
 }

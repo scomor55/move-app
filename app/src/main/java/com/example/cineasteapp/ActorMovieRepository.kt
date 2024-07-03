@@ -12,8 +12,14 @@ import java.net.URL
 
 object ActorMovieRepository {
 
-    private const val tmdb_api_key : String = "8f702d466eba6666012654a3571332d6"
+    private const val tmdb_api_key : String = BuildConfig.TMDB_API_KEY
 
-
+    suspend fun getCast(id: Long): GetCastResponse?{
+        return withContext(Dispatchers.IO){
+            var response = ApiAdapter.retrofit.getCast(id)
+            val responseBody = response.body()
+            return@withContext responseBody
+        }
+    }
 
 }

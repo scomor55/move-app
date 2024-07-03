@@ -5,9 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class RecentMoviesFragment : Fragment() {
     private lateinit var recentMovies: RecyclerView
@@ -27,5 +32,20 @@ class RecentMoviesFragment : Fragment() {
             putExtra("movie_title", movie.title)
         }
         startActivity(intent)
+    }
+    fun onSuccess(movies:List<Movie>){
+        val toast = Toast.makeText(context, "Upcoming movies found", Toast.LENGTH_SHORT)
+        toast.show()
+        recentMoviesAdapter.updateMovies(movies)
+    }
+    fun onError() {
+        val toast = Toast.makeText(context, "Search error", Toast.LENGTH_SHORT)
+        toast.show()
+    }
+    fun getUpcoming( ){
+        val scope = CoroutineScope(Job() + Dispatchers.Main)
+        scope.launch{
+            MovieRepository.getUpcomingMovies2(onSuccess = ::onSuccess, onError = ::onError)
+        }
     }
 }
